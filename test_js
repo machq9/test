@@ -1,0 +1,25 @@
+// 1. 语法错误：缺少括号、分号
+function getUser(userId)
+    // 2. 安全漏洞：XSS风险、未验证输入
+    const userInput = userId;
+    const html = `<div>${userInput}</div>`; // 未转义，存在XSS
+    if (!userInput) { // 未验证输入类型，userId可能是字符串/数字
+        return null;
+    }
+    
+    // 3. 规范问题：不符合ESLint（变量名下划线、console.log调试代码）
+    const user_info = "test"; // 应改为camelCase：userInfo
+    console.log("debug: " + userInput); // 调试代码未删除
+    
+    // 4. 逻辑错误：异步代码错误处理缺失
+    async function fetchData() {
+        const res = await fetch("/api/user/" + userId); // 无try/catch
+        return res.json();
+    }
+    
+    // 5. 性能问题：重复DOM查询
+    for (let i = 0; i < 100; i++) {
+        document.getElementById("user-div").innerText = i; // 每次循环都查询DOM
+    }
+    return html;
+}
