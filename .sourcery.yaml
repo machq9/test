@@ -1,0 +1,14 @@
+# .sourcery.yaml
+reviews:
+  instructions:
+    # 规则1：所有数据库操作函数必须加业务注释（说明操作表名）
+    - content: "所有以get_/update_/delete_开头的数据库操作函数，必须包含docstring注释，且注释中说明操作的数据库表名（如：操作users表）"
+      severity: "WARNING"  # 风险等级
+      paths: ["**/*.py"]   # 仅作用于Python文件
+    # 规则2：禁止使用print，必须用logging模块
+    - content: "禁止在业务代码中使用print语句，必须替换为logging模块（如logging.info/logging.error）"
+      severity: "CRITICAL"
+      paths: ["src/**/*.py"]  # 仅作用于src目录下的代码
+    # 规则3：订单金额必须做非空+正数校验
+    - content: "处理订单金额（order_amount）的函数，必须先校验order_amount非空且大于0，否则抛出ValueError"
+      severity: "CRITICAL"
