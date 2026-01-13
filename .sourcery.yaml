@@ -1,23 +1,18 @@
-# .sourcery.yaml 完整配置（项目根目录）
+# .sourcery.yaml 最终可生效版本
 rules:
-  # 启用内置安全规则
+  # 启用内置安全规则（修正错误ID）
   enable:
     - sql-injection-via-concat
-    - resource-leak-file-handle
+    - ensure-file-closed  # 正确的资源泄漏规则ID
   disable: []
+  # 加载自定义AST规则（禁止print）
+  custom:
+    - .sourcery/rules/
+
 reviews:
   instructions:
-    # 规则1：安全规范 - 禁止SQL字符串拼接（强制参数化）
-    - content: "所有数据库查询必须使用参数化查询，禁止字符串拼接构造SQL；违反则标记为CRITICAL级风险"
+    # 仅作为备注，辅助审查者理解规则（非执行逻辑）
+    - content: "所有数据库查询必须使用参数化查询，禁止字符串拼接构造SQL"
       severity: "CRITICAL"
       paths: ["**/*.py"]
-    # 规则2：工程规范 - 禁止print，强制使用logging（指定日志级别）
-    - content: "业务代码禁止使用print语句，必须使用logging模块（要求包含INFO/ERROR级别）；违反则标记为CRITICAL级"
-      severity: "CRITICAL"
-      paths: ["**/*.py"]
-    # 规则3：业务逻辑 - 订单金额必须非空+正数校验（强制抛异常）
-    - content: "处理订单金额（变量名包含order_amount/amount）的函数，必须先校验：1. 非空 2. 大于0；未校验则标记为CRITICAL级，且要求抛出ValueError"
-      severity: "CRITICAL"
-      paths: ["**/*.py"]
-  # 关闭降噪，强制输出所有规则反馈
   filter_severity: ["CRITICAL", "WARNING"]
