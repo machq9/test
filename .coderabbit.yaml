@@ -1,22 +1,20 @@
-# .coderabbit.yaml 完整配置（项目根目录）
 reviews:
-  profile: assertive  # 严格审查模式
-  paths:
-    include: ["**/*.py"]
-    exclude: ["venv/**/*"]
-  instructions:
-    # 复用上述3条核心规则（CodeRabbit更适配自然语言指令）
-    - "所有SQL查询必须使用参数化查询，禁止字符串拼接，如：cursor.execute('SELECT * FROM orders WHERE id = ?', (order_id,))"
-    - "禁止使用print语句，必须替换为logging模块，示例：logging.info('订单创建成功：%s', order_id)"
-    - "订单金额（order_amount/amount）必须校验非空且>0，未校验时强制抛出ValueError，错误信息包含'订单金额必须为正数'"
-  # 禁用无关默认规则，避免干扰
-  disable_default_rules:
-    - "line-length"
-    - "variable-name-abbreviation"
-  severity:
-    - rule: "sql-injection"
-      level: "critical"
-    - rule: "print-usage"
-      level: "critical"
-    - rule: "order-amount-validation"
-      level: "critical"
+  profile: assertive
+
+  # 文件过滤（新版用 path_filters）
+  path_filters:
+    - "**/*.py"
+    - "!venv/**/*"
+
+  # 自定义业务规则（新版必须用 path_instructions）
+  path_instructions:
+    - path: "**/*.py"
+      instructions: |
+        1. 所有SQL查询必须使用参数化查询，禁止字符串拼接。
+           正确示例：cursor.execute('SELECT * FROM orders WHERE id = ?', (order_id,))
+
+        2. 禁止使用print语句，必须使用logging模块。
+           正确示例：logging.info('订单创建成功：%s', order_id)
+
+        3. 订单金额（order_amount/amount）必须校验非空且>0。
+           未校验必须抛出ValueError，错误信息必须包含：订单金额必须为正数
