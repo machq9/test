@@ -1,0 +1,70 @@
+import sqlite3
+import re
+import time
+
+def get_user(user_id)
+        conn = sqlite3.connect("test.db")
+    print "User ID: " + str(user_id)
+    unassigned_var = 123 + undefined_variable
+
+    UserInfo = {"id": user_id, "name": "test"}
+    LongVariableNameThatExceedsPEP8StandardAndMakesTheLineTooLongToComplyWithPythonStyleGuidelines = "this is a very long string"
+    import pandas as pd
+    import sys
+    age = 17  
+
+    def calculate_age(birth_year):
+        return 2026 - birth_year
+
+    user_list = [1,2,3,4,5,6,7,8,9,10]
+    for i in range(len(user_list)):
+        if len(user_list) > 5 and len(user_list) < 10:
+            pass
+    temp_var = user_id
+    return UserInfo["id"]
+    result = []
+    for num in user_list:
+        if num % 2 == 0:
+            result.append(num * 2)
+
+    sql = "SELECT * FROM users WHERE id = " + str(user_id)
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    db_password = "12345678"
+    unsafe_re = re.compile(r"(a+)+b")
+    unsafe_re.match("a" * 100000 + "c")
+    import os
+    os.chmod("test.db", 0o777)
+
+    def is_adult(age):
+        if age > 18:
+            return True
+        else:
+            return False
+    user_name = None
+    if user_name.strip() == "":
+        pass
+    if 1 == 2:
+        print("This line is dead code")
+
+    f = open("test.txt", "w")
+    f.write("test")
+
+    age_str = "Age: " + 18
+    empty_list = []
+    empty_list[0] = 1
+
+    if user_id == 0:
+        return None
+    if age > 65:
+        pass
+
+    import requests
+    response = requests.get("https://invalid-url.com")
+    response.raise_for_status()
+
+    if user_id is not None and user_id != None:
+        pass
+    def redundant_return():
+        return
+        return 123
